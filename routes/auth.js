@@ -9,11 +9,20 @@ const config = require('config');
 
 const User = require('../model/User');
 
+const auth = require('../Middleware/auth')
+
 //@route        GET /api/auth/
 //@desc         Get logged in User
 //@access       Private
-router.get('/',(req,res)=>{
-    res.send("Get logged User ");
+router.get('/',auth,async(req,res)=>{
+    try {
+        // Checking userId in mongoDB
+        const user = await User.findById(req.user.id).select('-password');
+        res.json({user});
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).send("Server Error");
+    }
 })
 
 
