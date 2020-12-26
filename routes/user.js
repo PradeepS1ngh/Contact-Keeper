@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
+// for jsonwebtoken
+const jwt = require('jsonwebtoken');
+const config = require('config');
+
 // for Validations
 const { check, validationResult } = require('express-validator');
 
@@ -24,7 +28,7 @@ router.post('/', [
 
     // Creating a new User
     const {name, email, password} = req.body;
-
+    
     try {
         let user = await User.findOne({email});
         if (user) {
@@ -40,7 +44,21 @@ router.post('/', [
         
         // Now Hashing COmplete we can Save the User in MongoDB
         await user.save();
-        res.send('user Saved Successfully')
+        // res.send('user Saved Successfully');
+        
+        // Create webToken for users
+        const payload = {
+            user : {
+                id : user.id
+            }
+        }
+        
+        jwt.sign(payload,config.get('jwtSecret'), {expiresIn : 360000}, (err,token) =>{
+            if(err) throw err;
+            
+            res.json({token});
+        })
+        
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error");

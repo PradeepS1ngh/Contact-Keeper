@@ -1,3 +1,4 @@
 {
-    "mongoURL" : "mongodb+srv://pradeep12345:12345@contactkeeper.wunhl.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "mongoURL" : "mongodb+srv://pradeep12345:12345@contactkeeper.wunhl.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "jwtSecret" : "secret"
 }
