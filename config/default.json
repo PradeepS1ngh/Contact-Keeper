@@ -1,9 +1,4 @@
 {
-<<<<<<< HEAD
     "mongoURL" : "mongodb+srv://pradeep12345:12345@contactkeeper.wunhl.mongodb.net/<dbname>?retryWrites=true&w=majority",
     "jwtSecret" : "secret"
 }
-=======
-    "mongoURL" : ""   // pastew url MongoURL here...
-}
->>>>>>> 65a4c5887ad89036826ba0b7d3b693a984c44938
