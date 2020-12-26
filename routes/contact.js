@@ -1,11 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
+// for protective we USe auth Middleware
+const auth = require('../Middleware/auth');
+
+const Contact = require('../model/Contact');
+
 //@route       GET /api/contacts
 //@desc        GEt all contact  
 //@access      Private
-router.get('/',(req,res)=>{
-    res.send("Read a Contact ");
+router.get('/',auth,async(req,res)=>{
+    try {
+        const contacts = await Contact.find({user : req.user.id}).sort({date : -1});
+        res.json(contacts);
+
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).send("Server Error");
+    }
 })
 
 //@route       POST /api/contacts
