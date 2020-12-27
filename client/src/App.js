@@ -19,7 +19,7 @@ function App() {
     <ContactState>
       <Router>
         <Navbar />
-        <div className='container'>
+        <div className='container' style={{maxWidth:"1307px"}}>
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
