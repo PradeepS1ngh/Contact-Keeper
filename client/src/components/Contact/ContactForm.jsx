@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext ,useEffect} from 'react'
 import ContactContext from '../../Context/Contacts/ContactContext'
 
 const ContactForm = () => {
 
     const contactContext = useContext(ContactContext);
+    const {addContact , current ,updateContact ,clearContact} = contactContext;
+
     const [contact, setContact] = useState({
         name: '',
         email: '',
@@ -16,17 +18,43 @@ const ContactForm = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        contactContext.addContact(contact);
+        if(current === null){
+            addContact(contact);
+        }else{
+            updateContact(contact);
+        }
         setContact({
             name: '',
             email: '',
             phone: '',
             type: 'personal'
         })
+        clearAll();
     }
+
+    const clearAll = () => {
+        clearContact();
+    }
+
+    // for updating purpose as we know if we click on Edit Button Cuurent is filled wiht that contact value so we use that thing
+    useEffect(() => {
+        if(current !== null){
+            setContact({...current});
+        }else{
+            setContact({
+                name: '',
+                email: '',
+                phone: '',
+                type: 'personal'
+            })
+        }
+    }, [ContactContext , current])
+
     return (
         <form onSubmit={onSubmit}>
-            <h1 className='text-center bg-primary text-light'>Add Contact</h1>
+            <div className={'text-center '+ (current == null ? 'bg-primary ' : 'bg-success ') +'text-light'} style={{height:"120px"}}>
+                <h1 className='contactFormheading'>{current == null ? "Add Contact" : "Edit Contact"}</h1>
+            </div>
             <div className="customformContainer">
                 <div>
                     <label className='form-label m-3'>Name</label>
@@ -53,7 +81,11 @@ const ContactForm = () => {
                         </div>
                     </div>
                 </div>
-                <button className='btn btn-primary w-100 m-lg-3'> Submit </button>
+                <button className={'btn '+ (current == null ? 'btn-primary ' : 'btn-success ') +'w-100 m-lg-3'}> 
+                    {current == null ? "Submit" : 'Update'} 
+                </button>
+                
+                {current && <button className='btn btn-light w-100 m-lg-3' onClick={clearAll}> Clear </button>}
             </div>
 
         </form>

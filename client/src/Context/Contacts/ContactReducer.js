@@ -1,6 +1,7 @@
 import { 
     ADD_CONTACT,
     DELETE_CONTACT,
+    SET_CURRENT,
     UPDATE_CONTACT,
     FILTER_CONTACTS,
     CLEAR_CURRENT,
@@ -15,6 +16,18 @@ export default (state, action) => {
         case DELETE_CONTACT:
             return {
                 ...state , contacts : state.contacts.filter( contact => { return contact.id !== action.payload} )
+            }
+        case SET_CURRENT :
+            return {
+                ...state , current : action.payload
+            }
+        case CLEAR_CURRENT : 
+            return {
+                ...state , current : null
+            }
+        case UPDATE_CONTACT :
+            return {
+                ...state , contacts : state.contacts.map(contact => {return (contact.id === action.payload.id) ? action.payload : contact})
             }
         default:
             return state;

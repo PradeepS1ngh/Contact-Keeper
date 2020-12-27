@@ -5,10 +5,10 @@ const Home = () => {
     return ( 
         <>
             <div className="customHome" style={{marginTop:"20px"}}>
-                <div className="col customform">
+                <div className="col customform " style={{marginRight:"50px"}}>
                     <ContactForm />
                 </div>
-                <div className='col  '>
+                <div className='col ' style={{marginLeft:"50px"}}>
                     <Contact />
                 </div>
             </div>
