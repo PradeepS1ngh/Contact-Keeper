@@ -1,8 +1,18 @@
-import React from 'react'
+import React ,{useContext , useEffect}from 'react'
 import Contact from '../Contact/Contact'
 import ContactForm from '../Contact/ContactForm'
 import ContactFilter from '../Contact/ContactFilter'
+
+import AuthContext from '../../Context/Auth/AuthContext';
+
 const Home = () => {
+
+    const authContext = useContext(AuthContext)
+
+    useEffect(() => {
+        authContext.loadUser();
+        //eslint-disable-next-line
+    }, [])
     return ( 
         <>
             <div className="customHome" style={{marginTop:"20px"}}>

@@ -2,13 +2,13 @@ import React,{useState , useContext , useEffect} from 'react'
 import AlertContext from '../../Context/Alert/AlertContext';
 import AuthContext from '../../Context/Auth/AuthContext';
 
-const Register = () => {
+const Register = (props) => {
 
     const alertContext  = useContext(AlertContext); 
     const { setAlert } = alertContext;
 
     const authContext = useContext(AuthContext);
-    const { register , error ,clearError} = authContext;
+    const { register , error ,clearError , isAuthenticated} = authContext;
 
     const [user, setUser] = useState({
         name : '',
@@ -36,11 +36,14 @@ const Register = () => {
     }
 
     useEffect(() => {
+        if(isAuthenticated){
+            props.history.push('/');
+        }
         if(error === 'User already Exists'){
             setAlert(error,'danger');
         }
-        // clearError();
-    }, [error])
+        clearError();
+    }, [error , isAuthenticated , props.history])
 
     return ( 
         <div className='container' style={{width:'40%' , marginTop:'10vh'}}>
