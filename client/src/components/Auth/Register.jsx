@@ -1,37 +1,46 @@
-import React,{useState , useContext} from 'react'
+import React,{useState , useContext , useEffect} from 'react'
 import AlertContext from '../../Context/Alert/AlertContext';
+import AuthContext from '../../Context/Auth/AuthContext';
 
 const Register = () => {
 
     const alertContext  = useContext(AlertContext); 
     const { setAlert } = alertContext;
 
+    const authContext = useContext(AuthContext);
+    const { register , error ,clearError} = authContext;
+
     const [user, setUser] = useState({
         name : '',
         email : '',
-        password1 : '',
+        password : '',
         password2 : '',
     })
-    const {name ,email ,password1 ,password2} = user;
+    const {name ,email ,password ,password2} = user;
 
     const onchange = e => setUser({...user , [e.target.name] : e.target.value})
 
     const onsubmit = e => {
         e.preventDefault();
-        if( name=== '' || email === '' || password1 === '' || password2 === ''){
+        if( name=== '' || email === '' || password === '' || password2 === ''){
             setAlert('Please Fill All the Details' , 'danger')
-        }else if(password1 !== password2){
+        }else if(password !== password2){
             setAlert('Password Not Match !' , 'primary');
         }else{
-            setAlert('Register Successfully' , 'success');
-            setUser({
-                name : '',
-                email : '',
-                password1 : '',
-                password2 : '',
+            register({
+                name,
+                email,
+                password
             })
         }
     }
+
+    useEffect(() => {
+        if(error === 'User already Exists'){
+            setAlert(error,'danger');
+        }
+        // clearError();
+    }, [error])
 
     return ( 
         <div className='container' style={{width:'40%' , marginTop:'10vh'}}>
@@ -47,7 +56,7 @@ const Register = () => {
                 </div>
                 <div className='m-lg-3'>
                     <label htmlFor="password">Password</label>
-                    <input className='form-control' type="password" name='password1' value={password1} onChange={onchange} minLength='6'/>
+                    <input className='form-control' type="password" name='password' value={password} onChange={onchange} minLength='6'/>
                 </div>
                 <div className='m-lg-3'>
                     <label htmlFor="password">Confirm Password</label>
