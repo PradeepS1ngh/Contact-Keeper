@@ -1,6 +1,14 @@
-import React,{useState} from 'react'
+import React,{useState , useContext , useEffect} from 'react'
+import AlertContext from '../../Context/Alert/AlertContext';
+import AuthContext from '../../Context/Auth/AuthContext';
 
-const Register = () => {
+const LogIn = props => {
+
+    const alertContext  = useContext(AlertContext); 
+    const { setAlert } = alertContext;
+
+    const authContext = useContext(AuthContext);
+    const { register , error ,clearError , isAuthenticated , loginUser} = authContext;
 
     const [user, setUser] = useState({
         email : '',
@@ -12,11 +20,25 @@ const Register = () => {
 
     const onsubmit = e => {
         e.preventDefault();
-        setUser({
-            email : '',
-            password : '',
-        })
+        if(email === '' || password === ''){
+            setAlert("Please Fill The Form",'danger')
+        }else{
+            loginUser({
+                email,
+                password
+            })
+        }
     }
+
+    useEffect(() => {
+        if(isAuthenticated){
+            props.history.push('/');
+        }
+        if(error == 'Invalid Credentials'){
+            setAlert(error,'danger');
+            clearError();
+        }
+    }, [error , isAuthenticated ,props.history])
 
     return ( 
         <div className='container' style={{width:'40%' , marginTop:'10vh'}}>
@@ -36,4 +58,4 @@ const Register = () => {
     );
 }
 
-export default Register;
+export default LogIn;

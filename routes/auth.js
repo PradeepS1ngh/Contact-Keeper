@@ -46,13 +46,13 @@ router.post('/',[
         const user = await User.findOne({email});
         // if a user exists in DB then go further if Not return Invalid Crend..
         if(!user){
-            return res.status(400).send("Invalid Credentials");
+            return res.status(400).json({msg : "Invalid Credentials"});
         }
         // if user exists then we check password Match or Not Using bcrypt
         const isMatch = await bcrypt.compare(password , user.password);
         // if pwd not match return Invalid Crend..
         if(!isMatch){
-            return res.status(400).send("Invalid Credentials Password Not Matched");
+            return res.status(400).json({msg : "Invalid Credentials"});
         }
         
         // Token prepration for response with Data
