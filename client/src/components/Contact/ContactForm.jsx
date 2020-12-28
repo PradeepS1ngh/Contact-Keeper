@@ -53,7 +53,7 @@ const ContactForm = () => {
     return (
         <form onSubmit={onSubmit}>
             <div className={'text-center '+ (current == null ? 'bg-primary ' : 'bg-success ') +'text-light'} style={{height:"120px"}}>
-                <h1 className='contactFormheading'>{current == null ? "Add Contact" : "Edit Contact"}</h1>
+                <h1 className='contactFormheading'> {current == null ?<i class='fas fa-user-plus m-2'></i> : <i class="fas fa-user-edit m-2"></i> }{current == null ? "Add Contact" : "Edit Contact"}</h1>
             </div>
             <div className="customformContainer">
                 <div>
