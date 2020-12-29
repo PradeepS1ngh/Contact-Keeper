@@ -21,7 +21,10 @@ const Home = () => {
                 </div>
                 <div className='col ' style={{marginLeft:"50px"}}>
                     < ContactFilter />
-                    <Contact />
+                    <div className='contactContainer'>
+                        <Contact />
+                    </div>
+                    
                 </div>
             </div>
         </>

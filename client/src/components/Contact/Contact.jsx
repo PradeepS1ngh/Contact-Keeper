@@ -18,7 +18,7 @@ const Contact = () => {
     }, [])
 
     if (contacts !== null && contacts.length === 0) {
-        return <h4 className='text-center'>Please Add a Contact</h4>
+        return <h4 className='text-center text-light'>Please Add a Contact</h4>
     }
     return (
 

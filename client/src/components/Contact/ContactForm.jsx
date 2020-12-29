@@ -93,7 +93,7 @@ const ContactForm = () => {
                     {current == null ? "Submit" : 'Update'} 
                 </button>
                 
-                {current && <button className='btn btn-light w-100 m-lg-3' onClick={clearAll}> Clear </button>}
+                {current && <button className='btn btn-light w-100' onClick={clearAll}> Clear </button>}
             </div>
 
         </form>

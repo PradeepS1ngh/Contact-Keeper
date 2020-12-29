@@ -12,6 +12,7 @@ import AlertState from './Context/Alert/AlertState'
 //Components
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
+import MainHome from './components/pages/MainHome'
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Register from './components/Auth/Register';
@@ -36,7 +37,8 @@ function App() {
             <div className='container' style={{ maxWidth: "1307px" }}>
               <Alert />
               <Switch>
-                <PrivateRoute exact path='/' component={Home} />
+                <Route exact path='/' component={MainHome} />
+                <PrivateRoute exact path='/gettingStarted' component={Home} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />

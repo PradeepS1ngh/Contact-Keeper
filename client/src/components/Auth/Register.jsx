@@ -46,8 +46,8 @@ const Register = (props) => {
     }, [error , isAuthenticated , props.history])
 
     return ( 
-        <div className='container' style={{width:'40%' , marginTop:'10vh'}}>
-            <h1 className='text-center'>Account <span className='text-primary'>Register</span></h1>
+        <div className='container register' style={{width:'40%' , marginTop:'10vh'}}>
+            <h1 className='text-center'>Account <span style={{color:"#f9a323"}}>Register</span></h1>
             <form onSubmit={onsubmit}>
                 <div className='m-lg-3'>
                     <label htmlFor="name">Name</label>
