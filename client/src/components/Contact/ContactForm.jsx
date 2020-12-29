@@ -1,29 +1,37 @@
 import React, { useState, useContext ,useEffect} from 'react'
 import ContactContext from '../../Context/Contacts/ContactContext'
+import AlertContext from '../../Context/Alert/AlertContext'
 
 const ContactForm = () => {
 
     const contactContext = useContext(ContactContext);
+    const alertContext = useContext(AlertContext);
     const {addContact , current ,updateContact ,clearContact , error} = contactContext;
 
     const [contact, setContact] = useState({
+        _id : null,
         name: '',
         email: '',
         phone: '',
         type: 'personal'
     })
-    const { name, email, phone, type } = contact;
+    const { name, email, phone, type , _id} = contact;
 
     const onChange = e => setContact({ ...contact, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault();
         if(current === null){
-            addContact(contact);
+            if(name === '' || phone === '' || email === ''){
+                alertContext.setAlert('please Fill The Form','danger');
+            }else{
+                addContact(contact);
+            }
         }else{
             updateContact(contact);
         }
         setContact({
+            _id : null,
             name: '',
             email: '',
             phone: '',

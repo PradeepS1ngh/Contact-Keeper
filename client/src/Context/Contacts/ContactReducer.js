@@ -28,7 +28,7 @@ export default (state, action) => {
             }
         case ADD_CONTACT:
             return {
-                ...state , contacts : [...state.contacts , action.payload ] , loading : false,
+                ...state , contacts : [ action.payload , ...state.contacts  ] , loading : false,
             }
         case CONTACT_ERROR:
             return {
@@ -37,7 +37,9 @@ export default (state, action) => {
             }
         case DELETE_CONTACT:
             return {
-                ...state , contacts : state.contacts.filter( contact => { return contact.id !== action.payload} ) ,loading : false,
+                ...state , 
+                contacts : state.contacts.filter( contact => { return contact._id !== action.payload} ) ,
+                loading : false,
             }
         case SET_CURRENT :
             return {
@@ -49,7 +51,9 @@ export default (state, action) => {
             }
         case UPDATE_CONTACT :
             return {
-                ...state , contacts : state.contacts.map(contact => {return (contact.id === action.payload.id) ? action.payload : contact}), loading : false,
+                ...state , 
+                contacts : state.contacts.map(contact => {return (contact._id === action.payload._id) ? action.payload : contact}),
+                loading : false,
             }
         case FILTER_CONTACTS :
             return {
