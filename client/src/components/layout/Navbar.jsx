@@ -2,14 +2,18 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import AuthContext from "../../Context/Auth/AuthContext";
+import ContactContext from "../../Context/Contacts/ContactContext";
 
 const Navbar = () => {
     const authContext = useContext(AuthContext);
     const { isAuthenticated, logOut, user } = authContext;
+    const contactContext = useContext(ContactContext);
+    const { clearContacts } = contactContext;
 
     const onLogOUT = () => {
         console.log("logout");
         logOut();
+        clearContacts();
     };
 
     const authUser = (
@@ -18,8 +22,8 @@ const Navbar = () => {
                 Hello , {user && <span className="text-light">{user.name}</span>}
             </li>
             <li className="nav-item pl-md-5">
-                <a onClick={onLogOUT}>
-                    <i className="fas fa-sign-out-alt"></i>
+                <i className="fas fa-sign-out-alt"></i>
+                <a onClick={onLogOUT} href="#"> 
                     <span>Log-Out</span>
                 </a>
             </li>

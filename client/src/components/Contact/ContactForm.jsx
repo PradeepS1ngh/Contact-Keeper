@@ -4,7 +4,7 @@ import ContactContext from '../../Context/Contacts/ContactContext'
 const ContactForm = () => {
 
     const contactContext = useContext(ContactContext);
-    const {addContact , current ,updateContact ,clearContact} = contactContext;
+    const {addContact , current ,updateContact ,clearContact , error} = contactContext;
 
     const [contact, setContact] = useState({
         name: '',

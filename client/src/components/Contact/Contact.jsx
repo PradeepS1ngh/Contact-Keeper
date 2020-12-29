@@ -1,6 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext , useEffect } from 'react'
 import ContactContext from '../../Context/Contacts/ContactContext'
 import ContactItem from './ContactItem'
+import SpinnerComponent from './SpinnerComponent';
+
 
 //Transition
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -9,23 +11,29 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const Contact = () => {
     const contactContext = useContext(ContactContext);
-    const { contacts, filtered } = contactContext;
+    const { contacts, filtered ,getContact , loading} = contactContext;
 
-    if (contacts.length == 0) {
+    useEffect(() => {
+        getContact();
+    }, [])
+
+    if (contacts !== null && contacts.length === 0) {
         return <h4 className='text-center'>Please Add a Contact</h4>
     }
     return (
-        <TransitionGroup> {filtered !== null ?
+
+        contacts !== null && !loading ? (<TransitionGroup> {filtered !== null ?
             filtered.map((contact) => {
-                return <CSSTransition key={contact.id} timeout={500} classNames="alert" >
+                return <CSSTransition key={contact._id} timeout={500} classNames="alert" >
                             <ContactItem  contact={contact} />
                         </CSSTransition>
             }) : contacts.map((contact) => {
-                return <CSSTransition key={contact.id} timeout={500} classNames="alert" >
+                return <CSSTransition key={contact._id} timeout={500} classNames="alert" >
                             <ContactItem  contact={contact} />
                         </CSSTransition>
             })}
-        </TransitionGroup>
+        </TransitionGroup>) : < SpinnerComponent />
+        
     )
 }
 
