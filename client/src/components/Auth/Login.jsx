@@ -1,4 +1,5 @@
 import React,{useState , useContext , useEffect} from 'react'
+import { Link } from  'react-router-dom'
 import AlertContext from '../../Context/Alert/AlertContext';
 import AuthContext from '../../Context/Auth/AuthContext';
 
@@ -53,6 +54,7 @@ const LogIn = props => {
                     <input className='form-control' type="password" name='password' value={password} onChange={onchange}/>
                 </div>
                 <button className='btn btn-primary w-100 m-lg-1'>Log-In</button>
+                <Link to='/register'><button className='btn btn-light w-100 m-lg-1 text-primary'>Create a Account ?</button></Link>
             </form>
         </div>
     );

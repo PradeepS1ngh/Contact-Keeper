@@ -17,6 +17,8 @@ import About from './components/pages/About';
 import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 
+import PrivateRoute from './components/Route/PrivateRoute'
+
 import setAuthToken from './utils/setAuthToken';
 
 if(localStorage.token){
@@ -34,7 +36,7 @@ function App() {
             <div className='container' style={{ maxWidth: "1307px" }}>
               <Alert />
               <Switch>
-                <Route exact path='/' component={Home} />
+                <PrivateRoute exact path='/' component={Home} />
                 <Route exact path='/about' component={About} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/login' component={Login} />
