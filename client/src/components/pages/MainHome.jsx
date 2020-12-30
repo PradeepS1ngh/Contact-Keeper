@@ -19,7 +19,8 @@ const MainHome = () => {
                 <div className='subContainer'>
                     <img src={authContext.isAuthenticated ? unlock : lock} alt="Image" />
                     <div className='info text-light'>
-                        <h1>Welcome,</h1>
+                        <h1>WELCOME</h1>
+                        <h3>Keep Your Contact Safe</h3>
                         <p>Store contact informations about your friend and family</p>
                         <Link to='/gettingStarted' className='text-light' ><button >Start</button></Link>
                         <Link to='/login' className='text-light' ><button >LogIn</button></Link>
